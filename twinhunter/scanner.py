@@ -4,7 +4,6 @@ from twinhunter.accesspoint import AccessPoint
 
 
 class Scanner(object):
-
     def __init__(self, interface: str):
         self._interface: str = interface
         self._ap_list: List[AccessPoint] = list()
@@ -17,7 +16,7 @@ class Scanner(object):
         Also, when a new AP is discovered any observers will be called and passed the new AccessPoint object.
         """
         if pkt.haslayer(scapy.Dot11Elt) and pkt.type == 0 and pkt.subtype == 8:
-            ap = AccessPoint(bssid=pkt.addr2, essid=pkt.info.decode('utf-8'))
+            ap = AccessPoint(bssid=pkt.addr2, essid=pkt.info.decode("utf-8"))
             if ap not in self._ap_list:
                 self._ap_list.append(ap)
 

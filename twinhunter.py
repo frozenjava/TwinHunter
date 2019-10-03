@@ -6,15 +6,17 @@ from twinhunter.scanner import Scanner
 from twinhunter.deauther import Deauther
 from twinhunter.accesspoint import AccessPoint
 
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Detect and stop Evil Twin attacks.')
-    parser.add_argument('--iface', help='The monitor interface to watch on (ex: wlan0mon).', required=True)
-    parser.add_argument('--essid', help='The SSID of the access point to protect.', required=True)
-    parser.add_argument('--bssid', help='The BSSID of the legitimate access point to protect.', required=True)
-    args = parser.parse_args()
 
-    # Logger callback lambda
-    logger = lambda ap: print('Discorvered Accesspoint => BSSID: {0!s} | ESSID: {1!s}'.format(ap.bssid, ap.essid))
+def logger(ap):
+    print("Discorvered Accesspoint => BSSID: {0!s} | ESSID: {1!s}".format(ap.bssid, ap.essid))
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Detect and stop Evil Twin attacks.")
+    parser.add_argument("--iface", help="The monitor interface to watch on (ex: wlan0mon).", required=True)
+    parser.add_argument("--essid", help="The SSID of the access point to protect.", required=True)
+    parser.add_argument("--bssid", help="The BSSID of the legitimate access point to protect.", required=True)
+    args = parser.parse_args()
 
     # The legitimate access point to trust
     trusted_ap = AccessPoint(bssid=args.bssid, essid=args.essid)
