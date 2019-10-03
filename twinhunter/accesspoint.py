@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
+
 @dataclass
-class AccessPoint():
+class AccessPoint:
     bssid: str
     essid: str
